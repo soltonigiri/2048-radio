@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/nneonneo/2048-ai",
+  "revision": "41e298f4571a9505e421e3a19af7a1cb372a368c",
+  "license": "MIT",
+  "files": {
+    "2048.cpp": "96c64da0a851935b708a325f3f8abb2c6eb8a07a0b8efadf90dd085d3e8ce00b",
+    "2048.h": "2597ae4726e872494bb57997154fdb0279cfc706bb0aad7dcb758be5231ec85d",
+    "README.md": "39e77a17291a0540da48e6a08a0dbf1a89299eed38500d239b0628c9dc8f8cc1",
+    "LICENSE": "7916c6cf82fc4ffcec8ffbe70a202851c1cfc5868cf96bc648ab40c1ce5cf30b"
+  }
+}

@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Lobby Time",
+    "artist": "Kevin MacLeod",
+    "file": "assets/audio/lobby-time.mp3",
+    "source": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1600054",
+    "download": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Lobby%20Time.mp3",
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "downloaded": "2026-09-06",
+    "sha256": "bc47dc1f1a0b1fe4ff631cee89ca3987b8f7b52f533d06233665d51300331beb",
+    "bytes": 6184700,
+    "modifications": "Original MP3 file unchanged; playback gain and track-transition fades applied by the app."
+  },
+  {
+    "title": "Hand Clap (first layered clap excerpt)",
+    "artist": "stuntstudio",
+    "file": "assets/audio/hand-clap.wav",
+    "source": "https://freesound.org/people/stuntstudio/sounds/421711/",
+    "download": "https://cdn.freesound.org/previews/421/421711_2825110-hq.mp3",
+    "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "downloaded": "2026-09-06",
+    "sha256": "c2e92606466ae7add9733aa84f85e82ce233038e1d445534e8a6305367614a7d",
+    "source_sha256": "e2eaf29829e0987eacb12cd67237c2542cb6b3216b1262dd69216ddeadace3d4",
+    "bytes": 63582,
+    "modifications": "Public HQ preview of 48 layered hand-clap recordings; first clap extracted at 0.473–0.833 s, stereo 44.1 kHz PCM, 0.7x gain, 1 ms fade-in and final 60 ms fade-out. No EQ, pitch shift or added reverb."
+  }
+]

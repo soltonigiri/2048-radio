@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f3eb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#171d19" media="(prefers-color-scheme: dark)">
+  <meta name="description" content="AIが2048を解き続ける、小さなラジオ。心地よいBGMと、数字を眺めるひととき。">
+  <title>2048 Radio — Small moves, endless music.</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body class="paused">
+  <div class="page-shell">
+    <header class="masthead">
+      <a class="brand" href="/" aria-label="2048 Radio ホーム">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>2048<span class="brand-light"> radio</span><span class="brand-dot">.</span></span>
+      </a>
+      <div class="masthead-right"><button class="text-button" id="about-button">Credits <span aria-hidden="true">↗</span></button></div>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <h1 id="page-title">Small moves.<br><em>Endless music.</em></h1>
+      </section>
+
+      <section class="radio-console" aria-label="2048 自動演奏">
+        <div class="console-body">
+          <aside class="station-panel" aria-label="再生中の曲">
+            <div class="record-wrap" aria-hidden="true"><div class="record" id="record"><div class="record-label"><span>2048<br>RADIO</span><b></b><small>SIDE ∞</small></div></div><span class="record-pin"></span></div>
+            <div class="music-picker"><strong id="track-title">Lobby Time</strong><a id="track-source" href="https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1600054" target="_blank" rel="noreferrer">Kevin MacLeod · CC BY 4.0 ↗</a></div>
+          </aside>
+
+          <div class="board-column">
+            <div class="board-heading"><span class="live-dot" id="live-dot" title="再生中"></span><span class="beat-dots" id="beat-dots" aria-label="曲の拍"><i></i><i></i><i></i><i></i></span><span class="move-direction" id="move-direction" aria-label="直前の移動方向">—</span></div>
+            <div class="board" id="board" role="img" aria-label="2048の盤面">
+              <div class="board-cells" aria-hidden="true"></div>
+              <div class="tiles" id="tiles" aria-hidden="true"></div>
+              <div class="board-overlay" id="board-overlay" hidden><strong>Game over</strong></div>
+            </div>
+          </div>
+
+          <aside class="sound-panel" aria-label="演奏情報">
+            <div class="score-block"><span class="eyebrow">SCORE</span><strong id="score">0</strong></div>
+            <div class="visualizer" id="visualizer" aria-hidden="true"></div>
+          </aside>
+        </div>
+
+        <p id="error-message" role="alert" hidden></p>
+        <div class="transport">
+          <div class="play-controls"><button class="play-button is-start" id="play-button" aria-label="スタート" title="スタート（Space）"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7Z" fill="currentColor"/></svg><span>START</span></button><button class="skip-button" id="skip-button" aria-label="次の盤面" title="次の盤面"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 6 10 6-10 6V6Zm13 0v12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button></div>
+          <div class="tempo-control" role="group" aria-label="速度"><div class="speed-presets"><button data-speed="0.5" aria-pressed="false">½</button><button data-speed="1" aria-pressed="true">1</button><button data-speed="2" aria-pressed="false">2</button><button data-speed="4" aria-pressed="false">4</button><button data-speed="max" aria-pressed="false" title="拍を待たず最速で進む">MAX</button></div></div>
+          <div class="volume-control"><button id="clap-button" class="clap-button" aria-pressed="true" aria-label="手拍子をオフにする" title="手拍子をオフにする"><span aria-hidden="true">👏</span></button><button id="sound-button" class="sound-button" aria-pressed="true" aria-label="音をオフにする" title="音をオフにする"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4V9Zm13 0 5 6m0-6-5 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><label for="volume" class="sr-only">音量</label><input type="range" id="volume" min="0" max="100" value="45" aria-label="音量"></div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <dialog id="about-dialog"><button id="close-about" class="dialog-close" aria-label="閉じる">×</button><div class="music-credits"><h2>Credits</h2><p><a href="https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1600054" target="_blank" rel="noreferrer">Lobby Time</a><br>Kevin MacLeod (incompetech.com)<br>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">Creative Commons: By Attribution 4.0</a>.<br>Original files unchanged. Playback volume and transition fades applied.</p><p><a href="https://freesound.org/people/stuntstudio/sounds/421711/" target="_blank" rel="noreferrer">Hand Clap</a> — stuntstudio<br><a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noreferrer">CC0 1.0</a> · Trimmed, faded and gain-adjusted.</p><p>AI: <a href="https://github.com/nneonneo/2048-ai" target="_blank" rel="noreferrer">nneonneo/2048-ai</a><br>Robert Xiao and contributors · <a href="/engine/LICENSE" target="_blank" rel="noreferrer">MIT License</a><br>Adapted for WebAssembly.</p></div></dialog>
+  <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+</body>
+</html>

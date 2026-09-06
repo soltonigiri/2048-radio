@@ -1,0 +1,6 @@
+.private/
+node_modules/
+.local/
+artifacts/
+dist/
+.wrangler/
