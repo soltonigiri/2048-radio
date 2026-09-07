@@ -28,7 +28,14 @@ export class BoardMotion {
     tile.dataset.index = index;
   }
 
+  effectPalette(element, value) {
+    const level = Math.min(value, 2048);
+    element.style.setProperty('--merge-glow', `var(--tile-${level})`);
+    element.style.setProperty('--merge-ink', `var(--tile-${level}-ink)`);
+  }
+
   value(tile, value) {
+    this.effectPalette(tile, value);
     tile.dataset.value = value;
     tile.classList.toggle('large', value > 2048);
     tile.querySelector('.tile-body').textContent = value;
@@ -100,12 +107,12 @@ export class BoardMotion {
     const tilt = horizontal ? 2.5 : -2.5;
     tile.classList.add('merged');
     this.animate(body, [
-      { transform: squish, filter: 'brightness(1.28)', offset: 0 },
-      { transform: `scale(${1 + punch * .9}) rotate(${tilt}deg)`, filter: 'brightness(1.12)', offset: .20 },
-      { transform: `scale(.90, 1.08) rotate(${-tilt * .7}deg)`, filter: 'brightness(1)', offset: .43 },
+      { transform: squish, boxShadow: 'inset 0 0 0 3px var(--merge-glow), 0 0 16px var(--merge-glow)', offset: 0 },
+      { transform: `scale(${1 + punch * .9}) rotate(${tilt}deg)`, boxShadow: 'inset 0 0 0 1px var(--merge-glow)', offset: .20 },
+      { transform: `scale(.90, 1.08) rotate(${-tilt * .7}deg)`, offset: .43 },
       { transform: 'scale(1.07, .95) rotate(.6deg)', offset: .64 },
       { transform: 'scale(.98, 1.025)', offset: .82 },
-      { transform: 'scale(1)', filter: 'brightness(1)', offset: 1 },
+      { transform: 'scale(1)', offset: 1 },
     ], { duration: (470 + weight * 160 + (milestone ? 90 : 0)) * (fast ? .8 : 1), easing: 'cubic-bezier(.22,.65,.35,1)' }, () => {
       if (!body.getAnimations().some(a => a.playState === 'running')) tile.classList.remove('merged');
     });
@@ -117,6 +124,7 @@ export class BoardMotion {
     this.effects.querySelector('.merge-milestone')?.remove();
     const badge = document.createElement('div');
     badge.className = 'merge-milestone';
+    this.effectPalette(badge, merge.value);
     badge.textContent = `${merge.value.toLocaleString()} ✦`;
     this.effects.append(badge);
     this.animate(badge, [
@@ -131,15 +139,18 @@ export class BoardMotion {
   burst(merge, milestone) {
     const burst = document.createElement('div');
     burst.className = `merge-burst${milestone ? ' milestone-burst' : ''}`;
-    this.position(burst, merge.index);
-    this.effects.append(burst);
+    this.effectPalette(burst, merge.value);
+    const tile = this.tiles.get(merge.index);
+    if (!tile) return;
+    tile.append(burst);
     const count = milestone ? 12 : 8;
+    const travel = burst.getBoundingClientRect().width * (milestone ? 1.25 : 1.05);
     for (let i = 0; i < count; i++) {
       const spark = document.createElement('i');
       spark.className = 'merge-spark';
       burst.append(spark);
       const angle = Math.PI * 2 * i / count + Math.PI / 8;
-      const distance = (milestone ? 85 : 60) * (i % 2 ? .75 : 1);
+      const distance = travel * (i % 2 ? .85 : 1);
       const x = Math.cos(angle) * distance;
       const y = Math.sin(angle) * distance;
       this.animate(spark, [
@@ -147,7 +158,7 @@ export class BoardMotion {
         { opacity: 1, offset: .12 },
         { transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) rotate(${i * 65}deg) scale(1)`, opacity: .9, offset: .55 },
         { transform: `translate(calc(-50% + ${x * 1.2}px), calc(-50% + ${y * 1.2 + 14}px)) rotate(${i * 90}deg) scale(.15)`, opacity: 0, offset: 1 },
-      ], { duration: milestone ? 850 : 620, easing: 'cubic-bezier(.12,.65,.3,1)' }, () => {
+      ], { duration: milestone ? 850 : 620, easing: 'linear' }, () => {
         spark.remove();
         if (!burst.childElementCount) burst.remove();
       });
