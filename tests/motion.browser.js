@@ -20,12 +20,19 @@
     assert(layer.querySelectorAll('.anticipating').length === 2, 'Both actual incoming tiles anticipate');
     motion.commit(result, { board: result.board, index: -1 }, context);
     const survivor = motion.tiles.get(0);
+    const burst = survivor.querySelector('.merge-burst');
+    assert(burst, 'Merge particles belong to their tile');
     const bounce = survivor.querySelector('.tile-body').getAnimations()[0];
     assert(bounce, 'Merge starts an impact');
     result = slide(result.board, 'down');
     motion.prepare(result, .035);
     motion.commit(result, { board: result.board, index: -1 }, { ...context, direction: 'down', fast: true });
     assert(motion.tiles.get(12) === survivor, 'Next move preserves tile identity');
+    assert(burst.parentElement === survivor, 'Particles follow the surviving tile');
+    const tileRect = survivor.getBoundingClientRect();
+    const burstRect = burst.getBoundingClientRect();
+    assert(Math.abs(tileRect.x - burstRect.x) < 1 && Math.abs(tileRect.y - burstRect.y) < 1,
+      'Particle origin moves with the tile after the next commit');
     assert(survivor.querySelector('.tile-body').getAnimations().includes(bounce), 'Next move preserves the SAME impact');
     await new Promise(resolve => setTimeout(resolve, 130));
     assert(survivor.isConnected && bounce.playState === 'running', 'Impact survives beyond old 51ms cutoff');
