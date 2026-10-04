@@ -6,13 +6,13 @@ AIが2048を自動プレイする、音楽付きのWebアプリ。ジャズに�
 
 ## 起動
 
-Node.js 22以降で実行します。追加パッケージやAPIキーは不要です。
+Node.js 22以降で実行します。
 
 ```sh
 npm start
 ```
 
-[localhost:2048](http://localhost:2048) を開き、**START**で再生します。音源は同梱しています。
+[localhost:2048](http://localhost:2048)を開き、STARTで再生します。
 
 ## 操作
 
@@ -20,18 +20,18 @@ npm start
 - ½・1・2・4：1拍あたりの手数を変更（初期値は1）
 - MAX：AIの計算が終わるたびに進行
 - スピーカー・音量スライダー：ミュート、音量調整
-- 👏：手拍子のオン・オフ
+- 手拍子ボタン：手拍子のオン・オフ
 - 次の盤面：新しいゲームを開始
 
 速度を変えても曲の速さは変わりません。別タブでも再生が続き、ゲームが終わると次の盤面へ進みます。
 
 ## 開発
 
-`npm test` でテストを実行できます。AIの構成と再ビルド方法は [engine/README.md](engine/README.md) を参照してください。
+`npm test`でテストを実行できます。AIの構成と再ビルド方法は[engine/README.md](engine/README.md)を参照してください。
 
 ## Web公開
 
-`npm run build` で配信用の `dist/` を生成します。[Cloudflare Pagesでの公開手順](docs/deploy.md)を参照してください。
+`npm run build`で配信用の`dist/`を生成します。[Cloudflare Pagesでの公開手順](docs/deploy.md)を参照してください。
 
 ## ライセンス
 
