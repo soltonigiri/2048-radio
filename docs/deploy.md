@@ -17,8 +17,6 @@ GitHubと連携すると、`main` の更新時に自動で公開できます。
 
 完了すると `*.pages.dev` のURLが発行されます。ページを開いてSTARTを押し、音楽・手拍子・盤面が動くことを確認してください。
 
-配信するのは `dist/` の静的ファイルです。AIもブラウザ内で動くため、Pages Functionsや有料のAPIは使いません。音源とライセンス表示もビルドに含まれます。
+配信用の`dist/`には音源とライセンス表示も含まれます。
 
-Freeプランは月500ビルド、1ファイル25 MiBまでです。静的ファイルへのリクエストは無料・無制限です。同梱BGMは約6.2 MBで、ファイルサイズ制限内に収まります。独自ドメインを使わなければ、ドメインの購入も不要です。
-
-公式資料：[静的サイトの公開](https://developers.cloudflare.com/pages/framework-guides/deploy-anything/) · [GitHub連携](https://developers.cloudflare.com/pages/configuration/git-integration/github-integration/) · [無料枠の上限](https://developers.cloudflare.com/pages/platform/limits/) · [静的配信の料金](https://developers.cloudflare.com/pages/functions/pricing/)
+詳細はCloudflareの[静的サイトの公開](https://developers.cloudflare.com/pages/framework-guides/deploy-anything/)と[GitHub連携](https://developers.cloudflare.com/pages/configuration/git-integration/github-integration/)を参照してください。
